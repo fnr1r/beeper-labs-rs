@@ -1,14 +1,21 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+#![allow(clippy::missing_errors_doc, reason = "these are generic utils")]
+#![allow(clippy::module_name_repetitions)]
+#![allow(clippy::match_ref_pats, reason = "conflict with pattern_type_mismatch")]
+#![allow(
+    clippy::needless_borrowed_reference,
+    reason = "conflict with const workaround"
+)]
+#![no_std]
 
 #[cfg(test)]
-mod tests {
-    use super::*;
+extern crate alloc;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub mod cf;
+mod const_util;
+#[cfg(feature = "either")]
+pub mod either;
+pub mod exts;
+#[cfg(feature = "option")]
+pub mod option;
+#[cfg(feature = "result")]
+pub mod result;
