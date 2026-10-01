@@ -1,3 +1,12 @@
+#![allow(unreachable_pub)]
+#![allow(clippy::pedantic)]
+#![allow(clippy::absolute_paths)]
+#![allow(clippy::missing_const_for_fn)]
+#![allow(clippy::pattern_type_mismatch)]
+#![allow(clippy::std_instead_of_alloc)]
+#![allow(clippy::undocumented_unsafe_blocks)]
+#![allow(clippy::unused_trait_names)]
+
 use cfg_if::cfg_if;
 
 pub use crate::{
