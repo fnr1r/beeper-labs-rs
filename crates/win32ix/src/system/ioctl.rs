@@ -16,11 +16,20 @@ use crate::{core::Result, utils::as_handle};
 pub type Opcode = u32;
 pub type IoctlResult = Result;
 
+/// A trait defining the properties of an `ioctl` command. (for Windows)
+///
+/// # Safety
+///
+/// See [`rustix` docs]. Basically make sure that the output buffer is
+/// initialized and the `ioctl` didn't fail spectacularly and stuff.
+///
+/// [`rustix` docs]: https://docs.rs/rustix/latest/rustix/ioctl/trait.Ioctl.html
 pub unsafe trait WinDeviceIoControl {
     type Output;
     const OPCODE: Opcode;
     const IS_MUTATING: bool;
     fn as_ptr(&self) -> Option<*const c_void>;
+    #[allow(clippy::missing_safety_doc)]
     unsafe fn output_from_buf(
         res: IoctlResult,
         extract_output: Option<MaybeUninit<Self::Output>>,
@@ -28,6 +37,11 @@ pub unsafe trait WinDeviceIoControl {
     ) -> Result<Self::Output>;
 }
 
+/// Perform an `ioctl` call.
+///
+/// # Safety
+///
+/// [`rustix` docs](https://docs.rs/rustix/latest/rustix/ioctl/fn.ioctl.html)
 #[inline]
 pub unsafe fn ioctl<I: WinDeviceIoControl>(
     handle: &impl AsRawHandle,

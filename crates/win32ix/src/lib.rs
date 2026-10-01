@@ -13,7 +13,6 @@
 #![cfg(windows)]
 #![allow(clippy::pedantic)]
 #![allow(clippy::missing_errors_doc)]
-#![allow(clippy::missing_safety_doc)]
 #![allow(clippy::pattern_type_mismatch)]
 #![allow(clippy::undocumented_unsafe_blocks)]
 #![warn(clippy::inline_always)]
