@@ -2,7 +2,8 @@
 name = "win32ix"
 version = "0.0.0"
 edition = "2021"
-rust-version = "1.76"
+#rust-version = "1.76"
+rust-version = "1.82"
 
 [dependencies]
 bytemuck = { version = "1.4", features = ["derive"] }
@@ -25,3 +26,6 @@ features = [
 
 [features]
 reexport_windows = []
+
+[lints]
+workspace = true
