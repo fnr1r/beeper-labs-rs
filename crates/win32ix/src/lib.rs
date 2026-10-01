@@ -17,6 +17,7 @@
 #![allow(clippy::missing_safety_doc)]
 #![allow(clippy::pattern_type_mismatch)]
 #![allow(clippy::undocumented_unsafe_blocks)]
+#![warn(clippy::inline_always)]
 
 #[cfg(feature = "reexport_windows")]
 pub use windows as sys;
