@@ -1,5 +1,9 @@
 [workspace]
-members = ["crates/controlflowtools", "crates/win32ix"]
+members = [
+    "crates/controlflowtools",
+    "crates/iter-retry",
+    "crates/win32ix",
+]
 resolver = "2"
 
 [workspace.lints.rust]
