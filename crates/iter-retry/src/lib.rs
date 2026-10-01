@@ -1,3 +1,5 @@
+#![no_std]
+
 use core::iter::{RepeatWith, Take, repeat_with};
 
 pub type RepeatFn<T> = Take<RepeatWith<T>>;
