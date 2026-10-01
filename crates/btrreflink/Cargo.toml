@@ -54,3 +54,6 @@ tracing = ["dep:tracing"]
 macos_dynlink = ["dep:libc", "controlflowtools/option"]
 macos_dynlink_eager = ["macos_dynlink", "dep:ctor"]
 macos_hax = ["dep:libc", "dep:rustix"]
+
+[lints]
+workspace = true

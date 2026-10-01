@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "crates/btrreflink",
     "crates/controlflowtools",
     "crates/iter-retry",
     "crates/win32ix",
