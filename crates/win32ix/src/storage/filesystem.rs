@@ -1,5 +1,5 @@
 use std::{
-    os::windows::{ffi::OsStrExt, io::AsRawHandle},
+    os::windows::{ffi::OsStrExt as _, io::AsRawHandle},
     path::Path,
 };
 
