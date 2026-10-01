@@ -1,3 +1,7 @@
+//! `rustix` kinda thing but for windows and only one crate
+//!
+//! based on `https://github.com/cargo-bins/reflink-copy`
+//!
 //! ## NOTES
 //!
 //! - Rust MSRV
