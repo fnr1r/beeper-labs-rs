@@ -1,5 +1,6 @@
 [workspace]
 members = ["crates/controlflowtools"]
+exclude = ["crates/win32ix"]
 resolver = "2"
 
 [workspace.lints.rust]
