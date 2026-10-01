@@ -71,7 +71,7 @@ fn get_volume_flags(volume_path_w: &[u16]) -> WinResult<u32> {
             None,
             None,
             None,
-            Some(&mut file_system_flags as *mut _),
+            Some(&mut file_system_flags),
             None,
         )
     }?;
@@ -101,14 +101,7 @@ pub fn check_reflink_support(from: impl AsRef<Path>, to: impl AsRef<Path>) -> Wi
 pub fn is_block_cloning_supported(file: &impl AsRawHandle) -> WinResult<bool> {
     let mut flags = 0u32;
     unsafe {
-        GetVolumeInformationByHandleW(
-            as_handle(file),
-            None,
-            None,
-            None,
-            Some(&mut flags as *mut _),
-            None,
-        )
+        GetVolumeInformationByHandleW(as_handle(file), None, None, None, Some(&mut flags), None)
     }?;
     Ok((flags & FILE_SUPPORTS_BLOCK_REFCOUNTING) != 0)
 }

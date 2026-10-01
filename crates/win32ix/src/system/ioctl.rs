@@ -54,7 +54,7 @@ pub unsafe fn ioctl<I: WinDeviceIoControl>(
             input_len,
             output,
             output_len,
-            Some(&mut bytes_returned as *mut _),
+            Some(&mut bytes_returned),
             None,
         )
     };
