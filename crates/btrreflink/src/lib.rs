@@ -1,7 +1,6 @@
 #![allow(clippy::absolute_paths)]
 #![allow(clippy::cast_possible_truncation)]
 #![allow(clippy::cast_sign_loss)]
-#![allow(clippy::elidable_lifetime_names)]
 #![allow(clippy::enum_glob_use)]
 #![allow(clippy::inline_always)]
 #![allow(clippy::items_after_statements)]

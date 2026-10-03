@@ -6,7 +6,7 @@ use std::{
     os::unix::ffi::OsStrExt,
 };
 
-pub(super) fn cstr<'a>(path: &'a OsStr) -> Result<Cow<'a, CStr>> {
+pub(super) fn cstr(path: &OsStr) -> Result<Cow<'_, CStr>> {
     let path = path.as_bytes();
     Ok(match CStr::from_bytes_with_nul(path) {
         Ok(res) => Borrowed(res),
