@@ -7,8 +7,8 @@ use crate::prelude::*;
 
 #[inline(always)]
 fn maybe_unsupported<T>(res: Result<T>) -> ControlFlow<Result<T>, Error> {
-    let err = branch_rev(res).map_break(Ok)?;
     use ErrorKind as E;
+    let err = branch_rev(res).map_break(Ok)?;
     Break(Err(match err.kind() {
         E::NotFound | E::PermissionDenied | E::AlreadyExists => err,
         _ => return Continue(err),

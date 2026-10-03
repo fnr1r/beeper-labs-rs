@@ -3,7 +3,6 @@
 #![allow(clippy::cast_sign_loss)]
 #![allow(clippy::enum_glob_use)]
 #![allow(clippy::inline_always)]
-#![allow(clippy::items_after_statements)]
 #![allow(clippy::manual_assert_eq)]
 #![allow(clippy::missing_const_for_fn)]
 #![allow(clippy::missing_errors_doc)]
