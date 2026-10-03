@@ -57,7 +57,7 @@ pub unsafe fn ioctl<I: WinDeviceIoControl>(
     } else {
         (None, 0)
     };
-    let output = output_buf.as_mut().map(|e| e.as_mut_ptr() as _);
+    let output = output_buf.as_mut().map(|e| e.as_mut_ptr().cast::<c_void>());
     let mut bytes_returned = 0u32;
 
     let res = unsafe {
@@ -78,7 +78,7 @@ pub unsafe fn ioctl<I: WinDeviceIoControl>(
 
 #[allow(clippy::unnecessary_wraps)]
 pub(crate) const fn cast_self<T: WinDeviceIoControl>(this: &T) -> Option<*const c_void> {
-    Some(from_ref(this) as _)
+    Some(from_ref(this).cast::<c_void>())
 }
 
 pub(crate) fn assume_output<T>(

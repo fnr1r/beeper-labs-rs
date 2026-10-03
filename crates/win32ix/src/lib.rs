@@ -16,7 +16,6 @@
 #![allow(clippy::cast_possible_wrap)]
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::needless_pass_by_value)]
-#![allow(clippy::ptr_as_ptr)]
 #![allow(clippy::undocumented_unsafe_blocks)]
 
 #[cfg(feature = "reexport_windows")]
