@@ -20,7 +20,7 @@ unsafe impl Ioctl for FileCloneRange {
         FICLONERANGE as _
     }
     fn as_ptr(&mut self) -> *mut c_void {
-        from_mut(self) as _
+        from_mut(self).cast()
     }
     unsafe fn output_from_ptr(
         out: IoctlOutput,
