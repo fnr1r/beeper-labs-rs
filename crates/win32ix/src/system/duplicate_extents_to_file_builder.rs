@@ -18,7 +18,7 @@ impl<'a> DuplicateExtentsToFileBuilder<'a> {
     }
     #[allow(clippy::pattern_type_mismatch)]
     #[inline]
-    pub fn run(&self, src_offset: u64, dst_offset: u64, src_length: u64) -> Result<()> {
+    pub fn run(&self, src_offset: i64, dst_offset: i64, src_length: i64) -> Result<()> {
         let Self { src, dst } = self;
         fsctl_duplicate_extents_to_file(src, src_offset, dst, dst_offset, src_length)
     }

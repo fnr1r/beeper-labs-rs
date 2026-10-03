@@ -30,16 +30,16 @@ unsafe impl Ioctl for DuplicateExtentsToFile {
 
 pub fn fsctl_duplicate_extents_to_file(
     src: &impl AsRawHandle,
-    src_offset: u64,
+    src_offset: i64,
     dst: &impl AsRawHandle,
-    dst_offset: u64,
-    src_length: u64,
+    dst_offset: i64,
+    src_length: i64,
 ) -> Result {
     let data = DuplicateExtentsToFile(DUPLICATE_EXTENTS_DATA {
         FileHandle: as_handle(src),
-        SourceFileOffset: src_offset as i64,
-        TargetFileOffset: dst_offset as i64,
-        ByteCount: src_length as i64,
+        SourceFileOffset: src_offset,
+        TargetFileOffset: dst_offset,
+        ByteCount: src_length,
     });
     unsafe { ioctl(dst, data) }
 }
