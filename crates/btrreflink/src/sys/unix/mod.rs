@@ -2,6 +2,7 @@ use cfg_if::cfg_if;
 
 pub use self::fd::{AsDirRef, AsFileRef, DirRef, FileRef};
 
+mod errno;
 mod fd;
 
 cfg_if! {

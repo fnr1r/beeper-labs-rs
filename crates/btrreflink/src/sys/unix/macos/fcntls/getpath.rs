@@ -9,7 +9,7 @@ use std::{
 
 use libc::{F_GETPATH, MAXPATHLEN, fcntl};
 
-use crate::{prelude::*, utils::errno};
+use crate::{prelude::*, sys::unix::errno::errnoval};
 
 const BUF_SIZE: usize = MAXPATHLEN as usize;
 
@@ -41,8 +41,8 @@ fn fcntl_getpath_buf<'a>(
     let fd = fd.as_raw_fd();
     let cmd = F_GETPATH;
     let res = unsafe { fcntl(fd, cmd, buf.as_mut_ptr()) };
-    errno(res)?;
-    Ok(unsafe { assume_partial_init_mut(buf, res as usize) })
+    let len = errnoval(res)? as _;
+    Ok(unsafe { assume_partial_init_mut(buf, len) })
 }
 
 fn fcntl_getpath_with<T>(

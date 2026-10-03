@@ -1,7 +1,7 @@
 use core::ffi::{CStr, c_int};
 use std::os::fd::{AsRawFd as _, BorrowedFd};
 
-use crate::{prelude::*, utils::errno};
+use crate::{prelude::*, sys::unix::errno::errno};
 
 // const CLONE_NOFOLLOW: c_int = 0x0001;
 const CLONE_NOOWNERCOPY: c_int = 0x0002;

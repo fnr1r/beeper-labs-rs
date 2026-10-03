@@ -1,5 +1,4 @@
 #![allow(clippy::absolute_paths)]
-#![allow(clippy::cast_sign_loss)]
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::must_use_candidate)]
 #![allow(clippy::std_instead_of_alloc)]
@@ -30,4 +29,3 @@ mod prelude;
 mod stubs;
 pub mod sys;
 pub mod types;
-mod utils;

@@ -42,6 +42,7 @@ pub(super) fn reflink_inner(src: FileRef, dst: FileRef) -> Result {
         src_file_size.try_into().unwrap()
     };
 
+    #[allow(clippy::cast_sign_loss)]
     reflink_block_internal(src, 0, dst, 0, total_copy_len as u64, src_cluster_size)?;
     if !src_is_sparse {
         fsctl_set_sparse(dst, false)?;

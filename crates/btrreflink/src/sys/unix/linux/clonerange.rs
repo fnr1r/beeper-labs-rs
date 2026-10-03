@@ -6,7 +6,7 @@ use rustix::{
     ioctl::{Ioctl, IoctlOutput, Opcode, ioctl, opcode::write},
 };
 
-use crate::utils::errno;
+use crate::sys::unix::errno::errno;
 
 #[derive(Debug)]
 #[repr(C)]
