@@ -10,7 +10,7 @@ use win32ix::{
 
 use super::refs::ClusterSize;
 
-pub(super) fn integrity_information_cvt(
+pub(super) const fn integrity_information_cvt(
     info: FsctlGetIntegrityInformation,
 ) -> FsctlSetIntegrityInformation {
     FsctlSetIntegrityInformation {
