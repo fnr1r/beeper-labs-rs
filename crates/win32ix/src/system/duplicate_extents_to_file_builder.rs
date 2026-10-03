@@ -16,6 +16,7 @@ impl<'a> DuplicateExtentsToFileBuilder<'a> {
         let dst = dst.as_handle();
         Self { src, dst }
     }
+    #[allow(clippy::pattern_type_mismatch)]
     #[inline]
     pub fn run(&self, src_offset: u64, dst_offset: u64, src_length: u64) -> Result<()> {
         let Self { src, dst } = self;

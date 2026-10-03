@@ -17,7 +17,6 @@
 #![allow(clippy::cast_possible_wrap)]
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::needless_pass_by_value)]
-#![allow(clippy::pattern_type_mismatch)]
 #![allow(clippy::ptr_as_ptr)]
 #![allow(clippy::undocumented_unsafe_blocks)]
 #![allow(clippy::unnecessary_wraps)]
