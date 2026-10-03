@@ -1,5 +1,4 @@
 #![allow(clippy::absolute_paths)]
-#![allow(clippy::cast_lossless)]
 #![allow(clippy::cast_possible_truncation)]
 #![allow(clippy::cast_sign_loss)]
 #![allow(clippy::elidable_lifetime_names)]

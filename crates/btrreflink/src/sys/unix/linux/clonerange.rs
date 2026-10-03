@@ -38,7 +38,7 @@ pub(super) fn ioctl_ficlonerange(
     src_length: u64,
 ) -> Result<(), Errno> {
     let op = FileCloneRange(file_clone_range {
-        src_fd: src.as_raw_fd() as _,
+        src_fd: src.as_raw_fd().into(),
         src_offset,
         src_length,
         dest_offset: dst_offset,
