@@ -1,8 +1,4 @@
-use core::{
-    ffi::c_void,
-    mem::{size_of, MaybeUninit},
-    ptr::from_ref,
-};
+use core::{ffi::c_void, mem::MaybeUninit, ptr::from_ref};
 use std::os::windows::io::AsRawHandle;
 
 pub use windows::Win32::System::Ioctl::{
@@ -37,7 +33,18 @@ pub unsafe trait WinDeviceIoControl {
     ) -> Result<Self::Output>;
 }
 
+macro_rules! u32_size_of {
+    ($ty:path, $name:literal) => {{
+        const _ERR: &str = concat!($name, " is too big");
+        u32::try_from(::core::mem::size_of::<$ty>()).expect(_ERR)
+    }};
+}
+
 /// Perform an `ioctl` call.
+///
+/// # Panics
+///
+/// - if the input or output size is bigger than [`u32::MAX`]
 ///
 /// # Safety
 ///
@@ -50,10 +57,10 @@ pub unsafe fn ioctl<I: WinDeviceIoControl>(
     let handle = as_handle(handle);
     let request = I::OPCODE;
     let input = ioctl.as_ptr();
-    let input_len = size_of::<I>() as u32;
+    let input_len = u32_size_of!(I, "input");
     let (mut output_buf, output_len) = if I::IS_MUTATING {
         let buf = MaybeUninit::<I::Output>::uninit();
-        (Some(buf), size_of::<I::Output>() as u32)
+        (Some(buf), u32_size_of!(I::Output, "output"))
     } else {
         (None, 0)
     };
