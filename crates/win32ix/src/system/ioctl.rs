@@ -76,6 +76,7 @@ pub unsafe fn ioctl<I: WinDeviceIoControl>(
     unsafe { I::output_from_buf(res, output_buf, bytes_returned) }
 }
 
+#[allow(clippy::unnecessary_wraps)]
 pub(crate) const fn cast_self<T: WinDeviceIoControl>(this: &T) -> Option<*const c_void> {
     Some(from_ref(this) as _)
 }

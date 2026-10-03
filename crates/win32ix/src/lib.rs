@@ -19,7 +19,6 @@
 #![allow(clippy::needless_pass_by_value)]
 #![allow(clippy::ptr_as_ptr)]
 #![allow(clippy::undocumented_unsafe_blocks)]
-#![allow(clippy::unnecessary_wraps)]
 
 #[cfg(feature = "reexport_windows")]
 pub use windows as sys;
