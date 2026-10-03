@@ -10,7 +10,6 @@
 #![allow(clippy::missing_const_for_fn)]
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::must_use_candidate)]
-#![allow(clippy::pattern_type_mismatch)]
 #![allow(clippy::ptr_as_ptr)]
 #![allow(clippy::std_instead_of_alloc)]
 #![allow(clippy::transmute_ptr_to_ptr)]

@@ -14,6 +14,7 @@ fn assert_mod(cluster_size: impl Into<u64>, bytes_copied: u64, bytes_to_copy: u6
     debug_assert_eq!(bytes_to_copy % cluster_size, 0);
 }
 
+#[allow(clippy::pattern_type_mismatch)]
 pub(super) fn reflink_block_internal(
     from: &File,
     from_offset: u64,
