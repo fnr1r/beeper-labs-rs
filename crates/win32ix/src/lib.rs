@@ -11,7 +11,6 @@
 //! - `1.76` for feature `ptr_from_ref`
 //! - `1.82` for dep `windows` `0.62.2`
 #![cfg(windows)]
-#![allow(clippy::borrow_as_ptr)]
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::undocumented_unsafe_blocks)]
 
