@@ -1,8 +1,8 @@
 use core::{mem::MaybeUninit, ptr::from_mut};
 use std::{
     os::{
-        fd::{AsRawFd, BorrowedFd},
-        unix::ffi::OsStrExt,
+        fd::{AsRawFd as _, BorrowedFd},
+        unix::ffi::OsStrExt as _,
     },
     path::PathBuf,
 };

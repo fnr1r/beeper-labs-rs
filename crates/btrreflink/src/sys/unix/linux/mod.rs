@@ -1,8 +1,8 @@
-use std::os::fd::AsFd;
+use std::os::fd::AsFd as _;
 
 use rustix::fs::{copy_file_range, ioctl_ficlone};
 
-use self::{clonerange::ioctl_ficlonerange, ufile::UnixFileExt};
+use self::{clonerange::ioctl_ficlonerange, ufile::UnixFileExt as _};
 use crate::prelude::*;
 
 mod clonerange;

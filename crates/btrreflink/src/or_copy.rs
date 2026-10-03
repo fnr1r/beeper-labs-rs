@@ -1,6 +1,6 @@
 use core::ops::ControlFlow::{self, Continue};
 
-use controlflowtools::{exts::CfBranchExt, result::branch_fwd};
+use controlflowtools::{exts::CfBranchExt as _, result::branch_fwd};
 
 use crate::{
     fallback::{fs_copy, io_copy},

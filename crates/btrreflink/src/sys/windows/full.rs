@@ -1,4 +1,4 @@
-use std::os::windows::fs::MetadataExt;
+use std::os::windows::fs::MetadataExt as _;
 
 use win32ix::{
     core::Result,

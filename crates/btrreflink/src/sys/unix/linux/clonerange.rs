@@ -1,5 +1,5 @@
 use core::{ffi::c_void, ptr::from_mut};
-use std::os::fd::{AsRawFd, BorrowedFd};
+use std::os::fd::{AsRawFd as _, BorrowedFd};
 
 use libc::{FICLONERANGE, file_clone_range};
 use rustix::{

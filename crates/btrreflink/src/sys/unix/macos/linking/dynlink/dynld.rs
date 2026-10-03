@@ -8,7 +8,7 @@ use core::{
 };
 use std::io::ErrorKind;
 
-use controlflowtools::exts::{CfBranchExt, OptionExt};
+use controlflowtools::exts::{CfBranchExt as _, OptionExt as _};
 use libc::{RTLD_DEFAULT, dlsym};
 
 use crate::prelude::*;

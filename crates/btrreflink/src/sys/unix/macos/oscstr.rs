@@ -3,7 +3,7 @@ use std::{
     borrow::Cow::{self, Borrowed, Owned},
     ffi::{CString, OsStr},
     io::{Error, Result},
-    os::unix::ffi::OsStrExt,
+    os::unix::ffi::OsStrExt as _,
 };
 
 pub(super) fn cstr(path: &OsStr) -> Result<Cow<'_, CStr>> {

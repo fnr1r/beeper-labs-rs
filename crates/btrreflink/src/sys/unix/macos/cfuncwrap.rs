@@ -1,5 +1,5 @@
 use core::ffi::{CStr, c_int};
-use std::os::fd::{AsRawFd, BorrowedFd};
+use std::os::fd::{AsRawFd as _, BorrowedFd};
 
 use crate::{prelude::*, utils::errno};
 

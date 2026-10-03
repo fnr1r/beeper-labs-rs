@@ -2,7 +2,7 @@ use core::mem::forget;
 use std::{
     fs::remove_file,
     io::ErrorKind,
-    os::fd::{AsFd, AsRawFd, FromRawFd, OwnedFd},
+    os::fd::{AsFd as _, AsRawFd as _, FromRawFd as _, OwnedFd},
 };
 
 use rustix::{

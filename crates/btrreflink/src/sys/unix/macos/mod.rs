@@ -1,6 +1,6 @@
 //! can't reflink from fds on macos
 
-use std::{ffi::OsStr, os::fd::AsFd};
+use std::{ffi::OsStr, os::fd::AsFd as _};
 
 use cfg_if::cfg_if;
 
