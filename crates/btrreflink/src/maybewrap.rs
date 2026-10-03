@@ -1,4 +1,4 @@
-use core::ops::ControlFlow::{self, *};
+use core::ops::ControlFlow::{self, Break, Continue};
 use std::io::ErrorKind;
 
 use controlflowtools::result::branch_rev;

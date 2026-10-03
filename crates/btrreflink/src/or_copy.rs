@@ -1,4 +1,4 @@
-use core::ops::ControlFlow::{self, *};
+use core::ops::ControlFlow::{self, Continue};
 
 use controlflowtools::{exts::CfBranchExt, result::branch_fwd};
 

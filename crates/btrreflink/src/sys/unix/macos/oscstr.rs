@@ -1,6 +1,6 @@
 use core::ffi::{CStr, FromBytesWithNulError};
 use std::{
-    borrow::Cow::{self, *},
+    borrow::Cow::{self, Borrowed, Owned},
     ffi::{CString, OsStr},
     io::{Error, Result},
     os::unix::ffi::OsStrExt,

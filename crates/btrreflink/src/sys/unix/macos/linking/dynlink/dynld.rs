@@ -2,7 +2,7 @@ use core::{
     alloc::Layout,
     ffi::{CStr, c_void},
     mem::transmute_copy,
-    ops::ControlFlow::{self, *},
+    ops::ControlFlow::{self, Break, Continue},
     ptr::NonNull,
     sync::atomic::{AtomicU8, AtomicUsize, Ordering},
 };
