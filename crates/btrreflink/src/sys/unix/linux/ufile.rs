@@ -42,7 +42,7 @@ impl OpenOptions {
 }
 
 #[ext(UnixFileExt)]
-pub impl File {
+pub(crate) impl File {
     fn uoptions() -> OpenOptions {
         OpenOptions::default()
     }

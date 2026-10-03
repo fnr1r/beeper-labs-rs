@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+#![allow(unreachable_pub)]
 
 use std::io::ErrorKind;
 

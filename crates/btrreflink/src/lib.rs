@@ -1,4 +1,3 @@
-#![allow(unreachable_pub)]
 #![allow(clippy::absolute_paths)]
 #![allow(clippy::cast_lossless)]
 #![allow(clippy::cast_possible_truncation)]
