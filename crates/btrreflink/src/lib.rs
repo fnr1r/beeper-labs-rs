@@ -8,7 +8,6 @@
 #![allow(clippy::must_use_candidate)]
 #![allow(clippy::std_instead_of_alloc)]
 #![allow(clippy::undocumented_unsafe_blocks)]
-#![allow(clippy::uninlined_format_args)]
 #![allow(clippy::unused_trait_names)]
 
 use cfg_if::cfg_if;
