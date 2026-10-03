@@ -36,7 +36,7 @@ fn get_cached_support() -> ControlFlow<Error, bool> {
 }
 
 unsafe fn cast_fn_pointer<T>(p: NonNull<c_void>) -> T {
-    assert!(Layout::new::<T>() == Layout::new::<SampleFn>());
+    assert_eq!(Layout::new::<T>(), Layout::new::<SampleFn>());
     unsafe { transmute_copy(&p) }
 }
 
