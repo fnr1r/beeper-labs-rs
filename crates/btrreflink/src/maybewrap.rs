@@ -5,7 +5,7 @@ use controlflowtools::result::branch_rev;
 
 use crate::prelude::*;
 
-#[inline(always)]
+#[inline]
 fn maybe_unsupported<T>(res: Result<T>) -> ControlFlow<Result<T>, Error> {
     use ErrorKind as E;
     let err = branch_rev(res).map_break(Ok)?;
@@ -15,7 +15,7 @@ fn maybe_unsupported<T>(res: Result<T>) -> ControlFlow<Result<T>, Error> {
     }))
 }
 
-#[inline(always)]
+#[inline]
 pub(super) fn implwrap<T>(res: Result<T>) -> ControlFlow<Result<T>> {
     maybe_unsupported(res).map_continue(drop)
 }

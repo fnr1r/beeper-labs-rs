@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-#[inline(always)]
+#[inline]
 pub fn reflink_block(
     mut src: impl AsFileRef,
     src_offset: u64,
@@ -19,12 +19,12 @@ pub fn reflink_block(
     )
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink(mut src: impl AsFileRef, mut dst: impl AsFileRef) -> Result {
     crate::sys::reflink(src.as_file(), dst.as_file())
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_fd(
     mut src: impl AsFileRef,
     mut dstfd: impl AsDirRef,
@@ -36,7 +36,7 @@ pub fn reflink_fd(
     crate::sys::reflink_fd(src, dstfd, dst)
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_dd(
     mut srcfd: impl AsDirRef,
     src: impl AsFileName,
@@ -50,26 +50,26 @@ pub fn reflink_dd(
     crate::sys::reflink_dd(srcfd, src, dstfd, dst)
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_pp(src: impl AsFilePath, dst: impl AsFilePath) -> Result {
     let src = src.as_ref();
     let dst = dst.as_ref();
     crate::sys::reflink_pp(src, dst)
 }
 
-#[inline(always)]
+#[inline]
 pub fn is_reflink_supported() -> bool {
     crate::sys::is_reflink_supported()
 }
 
-#[inline(always)]
+#[inline]
 pub fn can_reflink_pp(src: impl AsFilePath, dst: impl AsFilePath) -> bool {
     let src = src.as_ref();
     let dst = dst.as_ref();
     crate::sys::can_reflink_pp(src, dst)
 }
 
-#[inline(always)]
+#[inline]
 pub fn kernel_copy(mut src: impl AsFileRef, mut dst: impl AsFileRef, len: usize) -> Result {
     crate::sys::kernel_copy(src.as_file(), dst.as_file(), len)
 }

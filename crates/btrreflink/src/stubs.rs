@@ -7,12 +7,12 @@ use crate::prelude::*;
 
 pub const SUPPORTS_REFLINKS: Option<bool> = None;
 
-#[inline(always)]
+#[inline]
 pub(crate) fn unsupported_err() -> Error {
     ErrorKind::Unsupported.into()
 }
 
-#[inline(always)]
+#[inline]
 pub(crate) fn unsupported() -> Result {
     Err(unsupported_err())
 }
@@ -29,37 +29,37 @@ pub fn reflink_block(
     unsupported()
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink(_src: FileRef, _dst: FileRef) -> Result {
     unsupported()
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_fd(_src: FileRef, _dstfd: DirRef, _dst: &OsStr) -> Result {
     unsupported()
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_dd(_srcfd: DirRef, _src: &OsStr, _dstfd: DirRef, _dst: &OsStr) -> Result {
     unsupported()
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_pp(_src: &Path, _dst: &Path) -> Result {
     unsupported()
 }
 
-#[inline(always)]
+#[inline]
 pub fn is_reflink_supported() -> bool {
     crate::sys::SUPPORTS_REFLINKS.unwrap_or_default()
 }
 
-#[inline(always)]
+#[inline]
 pub fn can_reflink_pp(_src: &Path, _dst: &Path) -> bool {
     crate::sys::is_reflink_supported()
 }
 
-#[inline(always)]
+#[inline]
 pub fn kernel_copy(_src: FileRef, _dst: FileRef, _len: usize) -> Result {
     unsupported()
 }

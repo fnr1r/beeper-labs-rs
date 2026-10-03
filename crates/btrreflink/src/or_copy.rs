@@ -11,7 +11,7 @@ fn reflink_or_copy_inner(src: FileRef, dst: FileRef) -> Result {
     crate::maybe::reflink(src, dst).c_to_b(|()| io_copy(src, dst, None))
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_or_copy(mut src: impl AsFileRef, mut dst: impl AsFileRef) -> Result {
     reflink_or_copy_inner(src.as_file(), dst.as_file())
 }
@@ -20,17 +20,17 @@ fn reflink_or_copy_pp_inner(src: &Path, dst: &Path) -> Result {
     crate::maybe::reflink_pp(src, dst).c_to_b(|()| fs_copy(src, dst, None))
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_or_copy_pp(src: impl AsFilePath, dst: impl AsFilePath) -> Result {
     reflink_or_copy_pp_inner(src.as_ref(), dst.as_ref())
 }
 
-#[inline(always)]
+#[inline]
 fn file_len(file: &File) -> Result<u64> {
     file.metadata().map(|e| e.len())
 }
 
-#[inline(always)]
+#[inline]
 fn try_reflink_or_krnl(src: FileRef, dst: FileRef) -> ControlFlow<Result, u64> {
     crate::maybe::reflink(src, dst)?;
     let len = branch_fwd(file_len(src)).map_break(Err)?;
@@ -43,7 +43,7 @@ fn reflink_or_krnl_or_copy_inner(src: FileRef, dst: FileRef) -> Result {
     try_reflink_or_krnl(src, dst).c_to_b(|len| io_copy(src, dst, Some(len)))
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink_or_krnl_or_copy(mut src: impl AsFileRef, mut dst: impl AsFileRef) -> Result {
     reflink_or_krnl_or_copy_inner(src.as_file(), dst.as_file())
 }

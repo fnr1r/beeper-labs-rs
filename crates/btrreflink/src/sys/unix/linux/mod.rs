@@ -8,7 +8,7 @@ use crate::prelude::*;
 mod clonerange;
 mod ufile;
 
-#[inline(always)]
+#[inline]
 pub fn reflink_block(
     src: FileRef,
     src_offset: u64,
@@ -24,7 +24,7 @@ pub fn reflink_block(
     )?)
 }
 
-#[inline(always)]
+#[inline]
 pub fn reflink(src: FileRef, dst: FileRef) -> Result<()> {
     Ok(ioctl_ficlone(src, dst)?)
 }
@@ -45,7 +45,7 @@ pub fn reflink_pp(src: &Path, dst: &Path) -> Result<()> {
     reflink(&mut src, &mut dst)
 }
 
-#[inline(always)]
+#[inline]
 pub fn kernel_copy(src: FileRef, dst: FileRef, len: usize) -> Result<()> {
     let res = copy_file_range(src, None, dst, None, len as _)?;
     debug_assert_eq!(res, len);

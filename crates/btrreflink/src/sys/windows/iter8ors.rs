@@ -2,7 +2,7 @@ use core::{iter::from_fn, ops::AddAssign};
 
 /// Iterator that yields an infinite sequence of the previous stored value and
 /// it's mutation
-#[inline(always)]
+#[inline]
 fn iter_stored<T: Clone, U>(
     mut store: T,
     mut mod_fn: impl FnMut(&mut T) -> U,
@@ -11,7 +11,7 @@ fn iter_stored<T: Clone, U>(
     from_fn(move || Some(f(&mut store)))
 }
 
-#[inline(always)]
+#[inline]
 pub(super) fn iter_add<T: Clone + AddAssign<U>, U: Clone>(
     store: T,
     mut add_fn: impl FnMut(&T) -> U,

@@ -7,7 +7,7 @@ use super::{iter8ors::iter_add, refs::ClusterSize};
 // Must be smaller than 4GB; This is always a multiple of ClusterSize
 const MAX_BLOCK: u64 = 4 * super::GIB as u64;
 
-#[inline(always)]
+#[inline]
 fn assert_mod(cluster_size: impl Into<u64>, bytes_copied: u64, bytes_to_copy: u64) {
     let cluster_size = cluster_size.into();
     debug_assert_eq!(bytes_copied % cluster_size, 0);
