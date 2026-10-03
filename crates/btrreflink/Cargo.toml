@@ -14,9 +14,6 @@ path = "../controlflowtools"
 default-features = false
 features = ["result"]
 
-[target.'cfg(target_os = "linux")'.dependencies]
-libc = "0.2"
-
 [target.'cfg(target_os = "windows")'.dependencies]
 thiserror = "2"
 

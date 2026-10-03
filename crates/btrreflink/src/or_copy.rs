@@ -35,7 +35,8 @@ fn try_reflink_or_krnl(src: FileRef, dst: FileRef) -> ControlFlow<Result, u64> {
     crate::maybe::reflink(src, dst)?;
     let len = branch_fwd(file_len(src)).map_break(Err)?;
     // TODO: remove kernel_copy. Rust's standard library already does that
-    crate::maybe::kernel_copy(src, dst, len as _)?;
+    // TODO: better error handling
+    crate::maybe::kernel_copy(src, dst, len.try_into().unwrap())?;
     Continue(len)
 }
 
