@@ -29,5 +29,5 @@ unsafe impl Ioctl for SetSparse {
 }
 
 pub fn fsctl_set_sparse(file: &impl AsRawHandle, b: bool) -> Result {
-    unsafe { ioctl(file, SetSparse(b as _)) }
+    unsafe { ioctl(file, SetSparse(b.into())) }
 }
