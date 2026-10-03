@@ -3,4 +3,5 @@ pub(crate) use std::{ffi::OsStr, fs::File, io::Error, path::Path};
 
 pub(crate) use crate::types::{AsDirRef, AsFileName, AsFilePath, AsFileRef, DirRef, FileRef};
 
+#[allow(clippy::absolute_paths)]
 pub(crate) type Result<T = (), E = Error> = core::result::Result<T, E>;

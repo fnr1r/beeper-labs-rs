@@ -15,6 +15,7 @@ const CLUSTER_SIZE_ERR: &str =
 
 pub(super) type ClusterSize = ReFSClusterSize;
 pub(super) type ClusterSizeError = ReFSClusterSizeError;
+#[allow(clippy::absolute_paths)]
 type Result<T, E = ClusterSizeError> = core::result::Result<T, E>;
 
 #[derive(Debug, Error, Constructor)]

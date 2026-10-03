@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 #![allow(unreachable_pub)]
+#![allow(clippy::absolute_paths)]
 
 use std::io::ErrorKind;
 

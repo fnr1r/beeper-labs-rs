@@ -1,3 +1,5 @@
+#![allow(clippy::absolute_paths)]
+
 use core::ops::ControlFlow;
 
 use super::maybewrap::implwrap;

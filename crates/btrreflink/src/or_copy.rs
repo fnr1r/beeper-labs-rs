@@ -1,3 +1,5 @@
+#![allow(clippy::absolute_paths)]
+
 use core::ops::ControlFlow::{self, Continue};
 
 use controlflowtools::{exts::CfBranchExt as _, result::branch_fwd};
