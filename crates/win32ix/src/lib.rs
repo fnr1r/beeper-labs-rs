@@ -13,7 +13,6 @@
 #![cfg(windows)]
 #![allow(clippy::borrow_as_ptr)]
 #![allow(clippy::missing_errors_doc)]
-#![allow(clippy::needless_pass_by_value)]
 #![allow(clippy::undocumented_unsafe_blocks)]
 
 #[cfg(feature = "reexport_windows")]

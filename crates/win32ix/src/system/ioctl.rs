@@ -49,6 +49,7 @@ macro_rules! u32_size_of {
 /// # Safety
 ///
 /// [`rustix` docs](https://docs.rs/rustix/latest/rustix/ioctl/fn.ioctl.html)
+#[allow(clippy::needless_pass_by_value, reason = "matching rustix")]
 #[inline]
 pub unsafe fn ioctl<I: WinDeviceIoControl>(
     handle: &impl AsRawHandle,
