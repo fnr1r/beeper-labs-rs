@@ -11,11 +11,16 @@
 //! - `1.76` for feature `ptr_from_ref`
 //! - `1.82` for dep `windows` `0.62.2`
 #![cfg(windows)]
-#![allow(clippy::pedantic)]
+#![allow(clippy::borrow_as_ptr)]
+#![allow(clippy::cast_lossless)]
+#![allow(clippy::cast_possible_truncation)]
+#![allow(clippy::cast_possible_wrap)]
 #![allow(clippy::missing_errors_doc)]
+#![allow(clippy::needless_pass_by_value)]
 #![allow(clippy::pattern_type_mismatch)]
+#![allow(clippy::ptr_as_ptr)]
 #![allow(clippy::undocumented_unsafe_blocks)]
-#![warn(clippy::inline_always)]
+#![allow(clippy::unnecessary_wraps)]
 
 #[cfg(feature = "reexport_windows")]
 pub use windows as sys;
