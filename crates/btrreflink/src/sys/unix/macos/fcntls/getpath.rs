@@ -1,4 +1,4 @@
-use core::mem::{MaybeUninit, transmute};
+use core::{mem::MaybeUninit, ptr::from_mut};
 use std::{
     os::{
         fd::{AsRawFd, BorrowedFd},
@@ -21,7 +21,7 @@ type Dat = [u8];
 #[inline]
 unsafe fn assume_init_mut<T>(this: &mut [MaybeUninit<T>]) -> &mut [T] {
     // SAFETY: MaybeUninit is repr(transparent)
-    unsafe { transmute(this) }
+    unsafe { &mut *(from_mut(this) as *mut _) }
 }
 
 #[inline]

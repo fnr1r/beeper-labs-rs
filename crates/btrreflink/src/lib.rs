@@ -9,7 +9,6 @@
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::must_use_candidate)]
 #![allow(clippy::std_instead_of_alloc)]
-#![allow(clippy::transmute_ptr_to_ptr)]
 #![allow(clippy::undocumented_unsafe_blocks)]
 #![allow(clippy::uninlined_format_args)]
 #![allow(clippy::unused_trait_names)]
