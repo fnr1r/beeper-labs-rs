@@ -41,6 +41,7 @@ pub(super) fn reflink_block_internal(
         (src_offset, dst_offset, bytes_to_copy)
     };
     let try_fn = |(src_offset, dst_offset, bytes_to_copy)| {
+        #[allow(clippy::cast_possible_wrap)]
         builder.run(src_offset as _, dst_offset as _, bytes_to_copy as _)
     };
 
