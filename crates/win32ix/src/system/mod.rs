@@ -4,6 +4,7 @@ mod get_integrity_information;
 pub mod ioctl;
 mod set_integrity_information;
 mod set_sparse;
+pub mod system_services;
 
 pub mod ops {
     pub use super::{

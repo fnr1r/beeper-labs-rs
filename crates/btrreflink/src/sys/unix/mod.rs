@@ -1,6 +1,7 @@
 use cfg_if::cfg_if;
 
 pub use self::fd::{AsDirRef, AsFileRef, DirRef, FileRef};
+pub use crate::stubs::{SUPPORTS_REFLINKS, can_reflink_pp, is_reflink_supported};
 
 mod errno;
 mod fd;

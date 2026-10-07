@@ -12,6 +12,7 @@
 //! - `1.82` for dep `windows` `0.62.2`
 #![cfg(windows)]
 #![allow(clippy::missing_errors_doc)]
+#![allow(clippy::std_instead_of_alloc)]
 #![allow(clippy::undocumented_unsafe_blocks)]
 
 #[cfg(feature = "reexport_windows")]
