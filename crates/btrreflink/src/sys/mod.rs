@@ -9,10 +9,7 @@ cfg_if! {
     } else if #[cfg(target_os = "windows")] {
         mod windows;
         pub use self::windows::*;
-    } else if #[cfg(target_os = "macos")] {
-        // can't reflink from fds on macos
-        use stubs as sys;
     } else {
-        pub(crate) use crate::stubs::*;
+        pub use crate::stubs::*;
     }
 }
