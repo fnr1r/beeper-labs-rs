@@ -1,6 +1,6 @@
-use std::os::fd::AsFd as _;
+use std::{fs::File, os::fd::AsFd as _};
 
-use rustix::fs::{copy_file_range, ioctl_ficlone};
+use rustix::fs::ioctl_ficlone;
 
 use self::{clonerange::ioctl_ficlonerange, ufile::UnixFileExt as _};
 use crate::prelude::*;
@@ -43,11 +43,4 @@ pub fn reflink_pp(src: &Path, dst: &Path) -> Result<()> {
     let mut src = File::open(src)?;
     let mut dst = File::create_new(dst)?;
     reflink_ff(&mut src, &mut dst)
-}
-
-#[inline]
-pub fn kernel_copy(src: FileRef, dst: FileRef, len: usize) -> Result<()> {
-    let res = copy_file_range(src, None, dst, None, len as _)?;
-    debug_assert_eq!(res, len);
-    Ok(())
 }

@@ -59,8 +59,3 @@ pub fn is_reflink_supported() -> bool {
 pub fn can_reflink_pp(_src: &Path, _dst: &Path) -> bool {
     crate::sys::is_reflink_supported()
 }
-
-#[inline]
-pub fn kernel_copy(_src: FileRef, _dst: FileRef, _len: usize) -> Result {
-    unsupported()
-}

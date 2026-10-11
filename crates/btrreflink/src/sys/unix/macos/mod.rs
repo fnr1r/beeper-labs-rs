@@ -9,7 +9,7 @@ use self::{
     oscstr::cstr,
 };
 use crate::prelude::*;
-pub use crate::stubs::{kernel_copy, reflink_block};
+pub use crate::stubs::reflink_block;
 
 mod cfuncwrap;
 mod linking;

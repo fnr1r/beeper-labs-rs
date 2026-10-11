@@ -70,8 +70,3 @@ pub fn can_reflink_pp(src: impl AsFilePath, dst: impl AsFilePath) -> bool {
     let dst = dst.as_ref();
     crate::sys::can_reflink_pp(src, dst)
 }
-
-#[inline]
-pub fn kernel_copy(mut src: impl AsFileRef, mut dst: impl AsFileRef, len: usize) -> Result {
-    crate::sys::kernel_copy(src.as_file(), dst.as_file(), len)
-}

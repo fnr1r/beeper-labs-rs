@@ -29,8 +29,3 @@ pub fn reflink_dd(
 pub fn reflink_pp(src: &Path, dst: &Path) -> ControlFlow<Result> {
     implwrap(crate::sys::reflink_pp(src, dst))
 }
-
-#[inline]
-pub fn kernel_copy(src: FileRef, dst: FileRef, len: usize) -> ControlFlow<Result> {
-    implwrap(crate::sys::kernel_copy(src, dst, len))
-}
