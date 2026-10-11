@@ -1,3 +1,5 @@
+#![allow(clippy::unnecessary_wraps)]
+
 use super::prototypes::{self, Clonefile, ClonefileAt, FClonefileAt};
 use crate::prelude::*;
 
