@@ -14,7 +14,7 @@ use super::fcntls::fcntl_getpath;
 use crate::prelude::*;
 
 /// Hacky way to implement fd-to-fd reflink on macos
-pub fn reflink(src: FileRef, dst: FileRef) -> Result {
+pub fn reflink_ff(src: FileRef, dst: FileRef) -> Result {
     let dst_fd = dst.as_fd();
     let dst_path = fcntl_getpath(dst_fd)?;
     let mut oflags = fcntl_getfl(dst_fd)?;

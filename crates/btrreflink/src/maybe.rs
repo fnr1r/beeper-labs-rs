@@ -6,8 +6,8 @@ use super::maybewrap::implwrap;
 use crate::prelude::*;
 
 #[inline]
-pub fn reflink(src: FileRef, dst: FileRef) -> ControlFlow<Result> {
-    implwrap(crate::sys::reflink(src, dst))
+pub fn reflink_ff(src: FileRef, dst: FileRef) -> ControlFlow<Result> {
+    implwrap(crate::sys::reflink_ff(src, dst))
 }
 
 #[inline]

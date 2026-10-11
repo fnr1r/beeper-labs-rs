@@ -38,14 +38,14 @@ pub fn reflink_block(
     )?)
 }
 
-pub fn reflink(src: FileRef, dst: FileRef) -> Result<()> {
+pub fn reflink_ff(src: FileRef, dst: FileRef) -> Result<()> {
     Ok(reflink_inner(src, dst)?)
 }
 
 pub fn reflink_pp(src: &Path, dst: &Path) -> Result<()> {
     let mut src = File::open(src)?;
     let mut dst = File::create_new(dst)?;
-    reflink(&mut src, &mut dst)
+    reflink_ff(&mut src, &mut dst)
 }
 
 pub fn can_reflink_pp(src: &Path, dst: &Path) -> bool {

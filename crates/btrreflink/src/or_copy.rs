@@ -9,13 +9,13 @@ use crate::{
     prelude::*,
 };
 
-fn reflink_or_copy_inner(src: FileRef, dst: FileRef) -> Result {
-    crate::maybe::reflink(src, dst).c_to_b(|()| io_copy(src, dst, None))
+fn reflink_or_copy_ff_inner(src: FileRef, dst: FileRef) -> Result {
+    crate::maybe::reflink_ff(src, dst).c_to_b(|()| io_copy(src, dst, None))
 }
 
 #[inline]
-pub fn reflink_or_copy(mut src: impl AsFileRef, mut dst: impl AsFileRef) -> Result {
-    reflink_or_copy_inner(src.as_file(), dst.as_file())
+pub fn reflink_or_copy_ff(mut src: impl AsFileRef, mut dst: impl AsFileRef) -> Result {
+    reflink_or_copy_ff_inner(src.as_file(), dst.as_file())
 }
 
 fn reflink_or_copy_pp_inner(src: &Path, dst: &Path) -> Result {
@@ -34,7 +34,7 @@ fn file_len(file: &File) -> Result<u64> {
 
 #[inline]
 fn try_reflink_or_krnl(src: FileRef, dst: FileRef) -> ControlFlow<Result, u64> {
-    crate::maybe::reflink(src, dst)?;
+    crate::maybe::reflink_ff(src, dst)?;
     let len = branch_fwd(file_len(src)).map_break(Err)?;
     // TODO: remove kernel_copy. Rust's standard library already does that
     // TODO: better error handling

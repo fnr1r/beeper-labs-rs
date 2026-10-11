@@ -12,9 +12,9 @@ pub use crate::{
 
 cfg_if! {
     if #[cfg(feature = "copy_fallback")] {
-        pub use crate::or_copy::{reflink_or_copy as reflink, reflink_or_copy_pp as reflink_pp};
+        pub use crate::or_copy::{reflink_or_copy_ff as reflink_ff, reflink_or_copy_pp as reflink_pp};
     } else {
-        pub use crate::only::{reflink, reflink_pp};
+        pub use crate::only::{reflink_ff, reflink_pp};
     }
 }
 

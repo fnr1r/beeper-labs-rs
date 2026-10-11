@@ -19,9 +19,9 @@ cfg_if! {
     if #[cfg(feature = "macos_hax")] {
         mod fcntls;
         mod hacky;
-        pub use self::hacky::reflink;
+        pub use self::hacky::reflink_ff;
     } else {
-        pub use crate::stubs::reflink;
+        pub use crate::stubs::reflink_ff;
     }
 }
 

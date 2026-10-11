@@ -22,8 +22,8 @@ pub fn reflink_block(
 }
 
 #[inline]
-pub fn reflink(mut src: impl AsFileRef, mut dst: impl AsFileRef) -> Result {
-    crate::sys::reflink(src.as_file(), dst.as_file())
+pub fn reflink_ff(mut src: impl AsFileRef, mut dst: impl AsFileRef) -> Result {
+    crate::sys::reflink_ff(src.as_file(), dst.as_file())
 }
 
 #[inline]

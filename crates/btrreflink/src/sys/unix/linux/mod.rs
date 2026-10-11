@@ -25,13 +25,13 @@ pub fn reflink_block(
 }
 
 #[inline]
-pub fn reflink(src: FileRef, dst: FileRef) -> Result<()> {
+pub fn reflink_ff(src: FileRef, dst: FileRef) -> Result<()> {
     Ok(ioctl_ficlone(src, dst)?)
 }
 
 pub fn reflink_fd(src: FileRef, dstfd: DirRef, dst: &OsStr) -> Result<()> {
     let mut dst = File::create_new_at(dstfd, dst)?;
-    reflink(src, &mut dst)
+    reflink_ff(src, &mut dst)
 }
 
 pub fn reflink_dd(srcfd: DirRef, src: &OsStr, dstfd: DirRef, dst: &OsStr) -> Result<()> {
@@ -42,7 +42,7 @@ pub fn reflink_dd(srcfd: DirRef, src: &OsStr, dstfd: DirRef, dst: &OsStr) -> Res
 pub fn reflink_pp(src: &Path, dst: &Path) -> Result<()> {
     let mut src = File::open(src)?;
     let mut dst = File::create_new(dst)?;
-    reflink(&mut src, &mut dst)
+    reflink_ff(&mut src, &mut dst)
 }
 
 #[inline]

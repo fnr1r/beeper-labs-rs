@@ -31,7 +31,7 @@ pub fn reflink_block(
 }
 
 #[inline]
-pub fn reflink(_src: FileRef, _dst: FileRef) -> Result {
+pub fn reflink_ff(_src: FileRef, _dst: FileRef) -> Result {
     unsupported()
 }
 
