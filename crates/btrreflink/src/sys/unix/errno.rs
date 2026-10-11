@@ -10,7 +10,7 @@ struct InvalidErrno(c_int);
 
 impl From<InvalidErrno> for Error {
     fn from(value: InvalidErrno) -> Self {
-        Error::new(ErrorKind::InvalidData, value)
+        Self::new(ErrorKind::InvalidData, value)
     }
 }
 

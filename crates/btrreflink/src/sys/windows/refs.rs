@@ -24,14 +24,14 @@ pub(super) struct ReFSClusterSizeError(u32);
 
 impl From<ClusterSizeError> for IoError {
     fn from(value: ClusterSizeError) -> Self {
-        IoError::new(ErrorKind::InvalidData, value)
+        Self::new(ErrorKind::InvalidData, value)
     }
 }
 
 impl From<ClusterSizeError> for WinError {
     fn from(value: ClusterSizeError) -> Self {
         let msg = value.to_string().into_boxed_str();
-        WinError::new(HRESULT::from(ERROR_INVALID_DATA), msg)
+        Self::new(HRESULT::from(ERROR_INVALID_DATA), msg)
     }
 }
 

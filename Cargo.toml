@@ -38,3 +38,4 @@ unused_trait_names = "warn"
 missing_const_for_fn = "warn"
 # conflicts with unreachable_pub
 #redundant_pub_crate = "warn"
+use_self = "warn"
