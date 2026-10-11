@@ -4,6 +4,7 @@ version = "0.0.0"
 edition = "2021"
 #rust-version = "1.76"
 rust-version = "1.82"
+license = "MIT OR Apache-2.0"
 
 [target.'cfg(windows)'.dependencies]
 bytemuck = { version = "1.4", features = ["derive"] }
