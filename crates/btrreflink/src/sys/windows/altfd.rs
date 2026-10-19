@@ -1,11 +1,8 @@
-use core::{convert::Infallible, marker::PhantomData};
+use core::convert::Infallible;
 use std::fs::File;
 
-#[derive(Debug, Clone, Copy)]
-#[repr(transparent)]
-pub struct NotExist<'a>(Infallible, PhantomData<&'a ()>);
+pub use crate::stubs::DirRef;
 
-pub type DirRef<'a> = NotExist<'a>;
 pub type FileRef<'a> = &'a mut File;
 
 pub trait AsDirRef {

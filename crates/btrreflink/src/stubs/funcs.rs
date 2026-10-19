@@ -1,22 +1,7 @@
-#![allow(dead_code)]
-#![allow(unreachable_pub)]
-#![allow(clippy::absolute_paths)]
-
-use std::io::ErrorKind;
-
+use super::error::unsupported;
 use crate::prelude::*;
 
 pub const SUPPORTS_REFLINKS: Option<bool> = None;
-
-#[inline]
-pub(crate) fn unsupported_err() -> Error {
-    ErrorKind::Unsupported.into()
-}
-
-#[inline]
-pub(crate) fn unsupported() -> Result {
-    Err(unsupported_err())
-}
 
 #[allow(dead_code)]
 pub fn reflink_block(
