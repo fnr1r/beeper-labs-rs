@@ -9,7 +9,7 @@ use self::{
     oscstr::cstr,
 };
 use crate::prelude::*;
-pub use crate::stubs::reflink_block;
+pub use crate::stubs::{is_reflink_supported, reflink_block};
 
 mod cfuncwrap;
 mod linking;

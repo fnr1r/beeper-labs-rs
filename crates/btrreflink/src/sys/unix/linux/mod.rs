@@ -2,10 +2,12 @@ use std::{fs::File, os::fd::AsFd as _};
 
 use rustix::fs::ioctl_ficlone;
 
+pub use self::support::is_reflink_supported;
 use self::{clonerange::ioctl_ficlonerange, ufile::UnixFileExt as _};
 use crate::prelude::*;
 
 mod clonerange;
+mod support;
 mod ufile;
 
 #[inline]

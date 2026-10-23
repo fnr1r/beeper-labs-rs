@@ -29,7 +29,7 @@ features = ["constructor"]
 
 [target.'cfg(target_os = "linux")'.dependencies.rustix]
 version = "1"
-features = ["fs"]
+features = ["fs", "pipe"]
 
 [target.'cfg(target_os = "macos")'.dependencies.rustix]
 version = "1"
