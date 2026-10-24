@@ -8,10 +8,9 @@ use std::{
 };
 
 use widestring::U16CStr;
-use windows::core::{PCSTR, PCWSTR};
 
 use crate::{
-    core::{Error, HResult, Result},
+    core::{Error, HResult, PCStr, PCWStr, Result},
     foundation::{Handle, ERROR_INVALID_PARAMETER},
 };
 
@@ -55,12 +54,12 @@ pub(crate) fn osstr_null_terminate(s: &OsStr) -> Result<Cow<'_, OsStr>> {
 }
 
 pub(crate) trait OsStrExt {
-    fn as_internal(&self) -> PCSTR;
+    fn as_internal(&self) -> PCStr;
 }
 
 impl OsStrExt for OsStr {
-    fn as_internal(&self) -> PCSTR {
-        PCSTR(self.as_encoded_bytes().as_ptr())
+    fn as_internal(&self) -> PCStr {
+        PCStr(self.as_encoded_bytes().as_ptr())
     }
 }
 
@@ -76,11 +75,11 @@ pub(crate) unsafe fn osstring_from_null_truncate(mut buf: Vec<u8>, inclusive: bo
 }
 
 pub(crate) trait U16CStrExt {
-    fn as_internal(&self) -> PCWSTR;
+    fn as_internal(&self) -> PCWStr;
 }
 
 impl U16CStrExt for U16CStr {
-    fn as_internal(&self) -> PCWSTR {
-        PCWSTR(self.as_ptr())
+    fn as_internal(&self) -> PCWStr {
+        PCWStr(self.as_ptr())
     }
 }
