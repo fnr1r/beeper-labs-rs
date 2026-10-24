@@ -5,8 +5,7 @@ use std::{
 
 use widestring::{U16CStr, U16CString};
 pub use windows::Win32::Storage::FileSystem::{
-    FILE_ATTRIBUTE_SPARSE_FILE as FileAttributeSparseFile,
-    FILE_FLAGS_AND_ATTRIBUTES as FileFlagsAndAttributes,
+    FILE_ATTRIBUTE_SPARSE_FILE, FILE_FLAGS_AND_ATTRIBUTES as FileFlagsAndAttributes,
 };
 use windows::Win32::{
     Foundation::MAX_PATH,

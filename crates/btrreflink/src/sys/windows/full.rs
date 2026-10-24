@@ -1,16 +1,14 @@
 use std::os::windows::fs::MetadataExt as _;
 
 use win32ix::{
-    core::Result,
-    storage::filesystem::{FileAttributeSparseFile, FileFlagsAndAttributes},
-    system::ops::fsctl_set_sparse,
+    core::Result, storage::filesystem::FILE_ATTRIBUTE_SPARSE_FILE, system::ops::fsctl_set_sparse,
 };
 
 use super::{blocked::reflink_block_internal, chkcluster::get_checked_cluster_size};
 use crate::prelude::*;
 
-fn is_sparse(attrs: u32) -> bool {
-    (FileFlagsAndAttributes(attrs) & FileAttributeSparseFile).0 != 0
+const fn is_sparse(attrs: u32) -> bool {
+    attrs & FILE_ATTRIBUTE_SPARSE_FILE.0 != 0
 }
 
 fn round_up(num_to_round: i64, multiple: i64) -> i64 {
