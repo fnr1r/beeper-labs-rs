@@ -8,20 +8,21 @@ pub use windows::Win32::Storage::FileSystem::{
     FILE_ATTRIBUTE_SPARSE_FILE as FileAttributeSparseFile,
     FILE_FLAGS_AND_ATTRIBUTES as FileFlagsAndAttributes,
 };
-use windows::{
-    core::{Result, Result as WinResult},
-    Win32::{
-        Foundation::MAX_PATH,
-        Storage::FileSystem::{
-            GetVolumeInformationA, GetVolumeInformationByHandleW, GetVolumeInformationW,
-            GetVolumeNameForVolumeMountPointA, GetVolumeNameForVolumeMountPointW,
-            GetVolumePathNameA, GetVolumePathNameW,
-        },
+use windows::Win32::{
+    Foundation::MAX_PATH,
+    Storage::FileSystem::{
+        GetVolumeInformationA, GetVolumeInformationByHandleW, GetVolumeInformationW,
+        GetVolumeNameForVolumeMountPointA, GetVolumeNameForVolumeMountPointW, GetVolumePathNameA,
+        GetVolumePathNameW,
     },
 };
 
-use crate::utils::{
-    as_handle, osstr_null_terminate, osstring_from_null_truncate, OsStrExt as _, U16CStrExt as _,
+use crate::{
+    core::Result,
+    utils::{
+        as_handle, osstr_null_terminate, osstring_from_null_truncate, OsStrExt as _,
+        U16CStrExt as _,
+    },
 };
 
 pub fn get_volume_path_name_w(file_path: &U16CStr) -> Result<U16CString> {
@@ -31,7 +32,7 @@ pub fn get_volume_path_name_w(file_path: &U16CStr) -> Result<U16CString> {
     Ok(U16CString::from_vec_truncate(buf))
 }
 
-pub fn get_volume_path_name_a(file_path: &OsStr) -> WinResult<OsString> {
+pub fn get_volume_path_name_a(file_path: &OsStr) -> Result<OsString> {
     let file_path = osstr_null_terminate(file_path)?;
     let path = file_path.as_internal();
     let mut buf = vec![0; MAX_PATH as _];
@@ -46,7 +47,7 @@ pub fn get_volume_name_for_volume_mount_point_w(volume_path: &U16CStr) -> Result
     Ok(U16CString::from_vec_truncate(buf))
 }
 
-pub fn get_volume_name_for_volume_mount_point_a(volume_path: &OsStr) -> WinResult<OsString> {
+pub fn get_volume_name_for_volume_mount_point_a(volume_path: &OsStr) -> Result<OsString> {
     let volume_path = osstr_null_terminate(volume_path)?;
     let path = volume_path.as_internal();
     let mut buf = vec![0; 50];
@@ -54,7 +55,7 @@ pub fn get_volume_name_for_volume_mount_point_a(volume_path: &OsStr) -> WinResul
     Ok(unsafe { osstring_from_null_truncate(buf, true) })
 }
 
-pub fn get_volume_flags_w(volume_path: &U16CStr) -> WinResult<u32> {
+pub fn get_volume_flags_w(volume_path: &U16CStr) -> Result<u32> {
     let path = volume_path.as_internal();
     let mut volume_flags = 0;
     let flags = Some(&raw mut volume_flags);
@@ -62,7 +63,7 @@ pub fn get_volume_flags_w(volume_path: &U16CStr) -> WinResult<u32> {
     Ok(volume_flags)
 }
 
-pub fn get_volume_flags_a(volume_path: &OsStr) -> WinResult<u32> {
+pub fn get_volume_flags_a(volume_path: &OsStr) -> Result<u32> {
     let volume_path = osstr_null_terminate(volume_path)?;
     let path = volume_path.as_internal();
     let mut volume_flags = 0;
@@ -71,7 +72,7 @@ pub fn get_volume_flags_a(volume_path: &OsStr) -> WinResult<u32> {
     Ok(volume_flags)
 }
 
-pub fn get_volume_flags_by_handle(file: &impl AsRawHandle) -> WinResult<u32> {
+pub fn get_volume_flags_by_handle(file: &impl AsRawHandle) -> Result<u32> {
     let file = as_handle(file);
     let mut volume_flags = 0;
     let flags = Some(&raw mut volume_flags);
