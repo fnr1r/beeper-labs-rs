@@ -19,6 +19,7 @@
 pub use windows as sys;
 
 pub mod core;
+pub mod foundation;
 pub mod storage;
 pub mod system;
 mod utils;

@@ -1,19 +1,19 @@
 use win32ix::{
     core::{
-        error::{Error, Result},
+        error::{Error, HResult, Result},
         widestring::{U16CString, error::ContainsNul},
     },
+    foundation::ERROR_INVALID_PARAMETER,
     storage::filesystem::{
         get_volume_flags_w, get_volume_name_for_volume_mount_point_w, get_volume_path_name_w,
     },
-    sys::{Win32::Foundation::ERROR_INVALID_PARAMETER, core::HRESULT},
     system::system_services::FILE_SUPPORTS_BLOCK_REFCOUNTING,
 };
 
 use crate::prelude::*;
 
 fn err_invalid_param(message: impl AsRef<str>) -> Error {
-    Error::new(HRESULT::from(ERROR_INVALID_PARAMETER), message)
+    Error::new(HResult::from(ERROR_INVALID_PARAMETER), message)
 }
 
 const CONTAINS_NULL: &str = "passed a Path containing non-terminator null-bytes";

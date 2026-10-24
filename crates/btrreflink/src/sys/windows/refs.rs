@@ -4,8 +4,8 @@ use std::io::{Error as IoError, ErrorKind};
 use derive_more::Constructor;
 use thiserror::Error;
 use win32ix::{
-    core::WinError,
-    sys::{Win32::Foundation::ERROR_INVALID_DATA, core::HRESULT},
+    core::{HResult, WinError},
+    foundation::ERROR_INVALID_DATA,
 };
 
 const KIB: u32 = super::KIB as _;
@@ -31,7 +31,7 @@ impl From<ClusterSizeError> for IoError {
 impl From<ClusterSizeError> for WinError {
     fn from(value: ClusterSizeError) -> Self {
         let msg = value.to_string().into_boxed_str();
-        Self::new(HRESULT::from(ERROR_INVALID_DATA), msg)
+        Self::new(HResult::from(ERROR_INVALID_DATA), msg)
     }
 }
 
