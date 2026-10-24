@@ -4,7 +4,7 @@ use std::os::windows::io::AsRawHandle;
 use windows::Win32::System::Ioctl::{DUPLICATE_EXTENTS_DATA, FSCTL_DUPLICATE_EXTENTS_TO_FILE};
 
 use super::ioctl::{
-    assume_no_output, cast_self, ioctl, IoctlResult, Opcode, WinDeviceIoControl as Ioctl,
+    assume_no_output, cast_self, ioctl, IoControlCode, IoControlOutput, WinDeviceIoControl as Ioctl,
 };
 use crate::{core::Result, utils::as_handle};
 
@@ -15,13 +15,13 @@ struct DuplicateExtentsToFile(DUPLICATE_EXTENTS_DATA);
 unsafe impl Ioctl for DuplicateExtentsToFile {
     type Output = ();
     const IS_MUTATING: bool = false;
-    const OPCODE: Opcode = FSCTL_DUPLICATE_EXTENTS_TO_FILE;
-    fn as_ptr(&self) -> Option<*const c_void> {
+    const OPCODE: IoControlCode = FSCTL_DUPLICATE_EXTENTS_TO_FILE;
+    fn as_ptr(&self) -> *const c_void {
         cast_self(self)
     }
     unsafe fn output_from_buf(
-        res: IoctlResult,
-        extract_output: Option<MaybeUninit<Self::Output>>,
+        res: IoControlOutput,
+        extract_output: MaybeUninit<Self::Output>,
         bytes_returned: u32,
     ) -> Result<Self::Output> {
         assume_no_output(res, extract_output, bytes_returned)

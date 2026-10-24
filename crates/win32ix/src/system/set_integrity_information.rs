@@ -7,7 +7,7 @@ use windows::Win32::System::Ioctl::{
 };
 
 use super::ioctl::{
-    assume_no_output, cast_self, ioctl, IoctlResult, Opcode, WinDeviceIoControl as Ioctl,
+    assume_no_output, cast_self, ioctl, IoControlCode, IoControlOutput, WinDeviceIoControl as Ioctl,
 };
 use crate::core::Result;
 
@@ -18,13 +18,13 @@ struct SetIntegrityInformation(FSCTL_SET_INTEGRITY_INFORMATION_BUFFER);
 unsafe impl Ioctl for &SetIntegrityInformation {
     type Output = ();
     const IS_MUTATING: bool = false;
-    const OPCODE: Opcode = FSCTL_SET_INTEGRITY_INFORMATION;
-    fn as_ptr(&self) -> Option<*const c_void> {
+    const OPCODE: IoControlCode = FSCTL_SET_INTEGRITY_INFORMATION;
+    fn as_ptr(&self) -> *const c_void {
         cast_self(self)
     }
     unsafe fn output_from_buf(
-        res: IoctlResult,
-        extract_output: Option<MaybeUninit<Self::Output>>,
+        res: IoControlOutput,
+        extract_output: MaybeUninit<Self::Output>,
         bytes_returned: u32,
     ) -> Result<Self::Output> {
         assume_no_output(res, extract_output, bytes_returned)
