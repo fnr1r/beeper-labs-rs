@@ -4,20 +4,18 @@ use std::{
 };
 
 use widestring::{U16CStr, U16CString};
+use windows::Win32::Storage::FileSystem::{
+    GetVolumeInformationA, GetVolumeInformationByHandleW, GetVolumeInformationW,
+    GetVolumeNameForVolumeMountPointA, GetVolumeNameForVolumeMountPointW, GetVolumePathNameA,
+    GetVolumePathNameW,
+};
 pub use windows::Win32::Storage::FileSystem::{
     FILE_ATTRIBUTE_SPARSE_FILE, FILE_FLAGS_AND_ATTRIBUTES as FileFlagsAndAttributes,
-};
-use windows::Win32::{
-    Foundation::MAX_PATH,
-    Storage::FileSystem::{
-        GetVolumeInformationA, GetVolumeInformationByHandleW, GetVolumeInformationW,
-        GetVolumeNameForVolumeMountPointA, GetVolumeNameForVolumeMountPointW, GetVolumePathNameA,
-        GetVolumePathNameW,
-    },
 };
 
 use crate::{
     core::Result,
+    foundation::MAX_PATH,
     utils::{
         as_handle, osstr_null_terminate, osstring_from_null_truncate, OsStrExt as _,
         U16CStrExt as _,

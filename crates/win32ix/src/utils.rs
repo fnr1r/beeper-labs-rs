@@ -8,15 +8,15 @@ use std::{
 };
 
 use widestring::U16CStr;
-use windows::{
-    core::{HRESULT, PCSTR, PCWSTR},
-    Win32::Foundation::{ERROR_INVALID_PARAMETER, HANDLE},
+use windows::core::{PCSTR, PCWSTR};
+
+use crate::{
+    core::{Error, HResult, Result},
+    foundation::{Handle, ERROR_INVALID_PARAMETER},
 };
 
-use crate::core::{Error, Result};
-
-pub(crate) fn as_handle(file: &impl AsRawHandle) -> HANDLE {
-    HANDLE(file.as_raw_handle())
+pub(crate) fn as_handle(file: &impl AsRawHandle) -> Handle {
+    Handle(file.as_raw_handle())
 }
 
 fn osstr_try_as_null_terminated(s: &OsStr) -> Result<&OsStr, FromBytesWithNulError> {
@@ -35,7 +35,7 @@ fn osstr_null_terminatex(s: &OsStr) -> OsString {
 }
 
 fn err_invalid_param(message: impl AsRef<str>) -> Error {
-    Error::new(HRESULT::from(ERROR_INVALID_PARAMETER), message)
+    Error::new(HResult::from(ERROR_INVALID_PARAMETER), message)
 }
 
 const CONTAINS_NULL: &str = "passed an OsStr containing non-terminator null-bytes";
