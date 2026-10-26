@@ -8,7 +8,6 @@ use crate::const_util::const_map;
 
 mod backports;
 pub(crate) mod ext;
-pub(crate) mod misc;
 
 #[inline]
 pub const fn branch_forward<T, E>(res: Result<T, E>) -> ControlFlow<E, T> {
