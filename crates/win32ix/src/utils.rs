@@ -1,7 +1,9 @@
+use core::ffi::CStr;
 use std::{
     borrow::Cow::{self, Borrowed, Owned},
     ffi::{
-        FromBytesWithNulError::{self, InteriorNul, NotNulTerminated},
+        CString,
+        FromBytesWithNulError::{self, InteriorNul},
         OsStr, OsString,
     },
     os::windows::io::AsRawHandle,
@@ -18,23 +20,48 @@ pub(crate) fn as_handle(file: &impl AsRawHandle) -> Handle {
     Handle(file.as_raw_handle())
 }
 
-fn osstr_try_as_null_terminated(s: &OsStr) -> Result<&OsStr, FromBytesWithNulError> {
-    Err(match s.as_encoded_bytes().iter().position(|e| e == &0) {
-        Some(pos) if pos == s.len() - 1 => return Ok(s),
-        Some(position) => InteriorNul { position },
-        None => NotNulTerminated,
-    })
+pub(crate) trait U16CStrExt {
+    fn as_internal(&self) -> PCWStr;
 }
 
-fn osstr_null_terminatex(s: &OsStr) -> OsString {
-    let mut buf = OsString::with_capacity(s.len() + 1);
-    buf.push(s);
-    buf.push("\0");
-    buf
+impl U16CStrExt for U16CStr {
+    fn as_internal(&self) -> PCWStr {
+        PCWStr(self.as_ptr())
+    }
+}
+
+pub(crate) trait CStrExt {
+    fn as_internal(&self) -> PCStr;
+}
+
+impl CStrExt for CStr {
+    fn as_internal(&self) -> PCStr {
+        PCStr(self.as_ptr().cast())
+    }
 }
 
 fn err_invalid_param(message: impl AsRef<str>) -> Error {
     Error::new(HResult::from(ERROR_INVALID_PARAMETER), message)
+}
+
+fn cstring_trunc_error() -> Error {
+    err_invalid_param("returned string not null-terminated")
+}
+
+pub(crate) fn cstring_checked(mut buf: Vec<u8>) -> Result<CString> {
+    let nul_pos = buf.iter().position(|e| e == &0).map(|e| e + 1);
+    buf.truncate(nul_pos.ok_or_else(cstring_trunc_error)?);
+    Ok(unsafe { CString::from_vec_with_nul_unchecked(buf) })
+}
+
+/// # Safety
+///
+/// Must not contain null bytes.
+unsafe fn osstr_null_terminatex(s: &OsStr) -> CString {
+    let mut buf = Vec::with_capacity(s.len() + 1);
+    buf.extend(s.as_encoded_bytes());
+    buf.push(b'\0');
+    unsafe { CString::from_vec_with_nul_unchecked(buf) }
 }
 
 const CONTAINS_NULL: &str = "passed an OsStr containing non-terminator null-bytes";
@@ -43,24 +70,14 @@ fn err_contains_null_at(pos: usize) -> Error {
     err_invalid_param(format!("{CONTAINS_NULL} at: {pos}"))
 }
 
-pub(crate) fn osstr_null_terminate(s: &OsStr) -> Result<Cow<'_, OsStr>> {
-    Ok(match osstr_try_as_null_terminated(s) {
+pub(crate) fn osstr_null_terminate(s: &OsStr) -> Result<Cow<'_, CStr>> {
+    Ok(match CStr::from_bytes_with_nul(s.as_encoded_bytes()) {
         Ok(s) => Borrowed(s),
-        Err(FromBytesWithNulError::NotNulTerminated) => Owned(osstr_null_terminatex(s)),
+        Err(FromBytesWithNulError::NotNulTerminated) => Owned(unsafe { osstr_null_terminatex(s) }),
         Err(InteriorNul { position }) => {
             return Err(err_contains_null_at(position));
         }
     })
-}
-
-pub(crate) trait OsStrExt {
-    fn as_internal(&self) -> PCStr;
-}
-
-impl OsStrExt for OsStr {
-    fn as_internal(&self) -> PCStr {
-        PCStr(self.as_encoded_bytes().as_ptr())
-    }
 }
 
 fn null_truncate(data: &mut Vec<u8>, inclusive: bool) {
@@ -72,14 +89,4 @@ fn null_truncate(data: &mut Vec<u8>, inclusive: bool) {
 pub(crate) unsafe fn osstring_from_null_truncate(mut buf: Vec<u8>, inclusive: bool) -> OsString {
     null_truncate(&mut buf, inclusive);
     unsafe { OsString::from_encoded_bytes_unchecked(buf) }
-}
-
-pub(crate) trait U16CStrExt {
-    fn as_internal(&self) -> PCWStr;
-}
-
-impl U16CStrExt for U16CStr {
-    fn as_internal(&self) -> PCWStr {
-        PCWStr(self.as_ptr())
-    }
 }
