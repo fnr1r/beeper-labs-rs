@@ -20,7 +20,7 @@ pub(crate) fn as_handle(file: &impl AsRawHandle) -> Handle {
 
 fn osstr_try_as_null_terminated(s: &OsStr) -> Result<&OsStr, FromBytesWithNulError> {
     Err(match s.as_encoded_bytes().iter().position(|e| e == &0) {
-        Some(pos) if pos == s.len() => return Ok(s),
+        Some(pos) if pos == s.len() - 1 => return Ok(s),
         Some(position) => InteriorNul { position },
         None => NotNulTerminated,
     })
