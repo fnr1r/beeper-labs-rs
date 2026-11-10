@@ -36,6 +36,7 @@ impl Sha256Digest {
     }
     #[cfg(feature = "mmap")]
     pub fn csum_mmap(file: impl MmapAsRawDesc) -> IoResult<Self> {
+        #![expect(clippy::undocumented_unsafe_blocks)]
         let buf = unsafe { Mmap::map(file) }?;
         Ok(Self::csum(&buf))
     }
@@ -54,27 +55,27 @@ impl Sha256Digest {
         encode_to_slice_upper(self.0, &mut buf).unwrap();
         buf
     }
-    #[inline(always)]
+    #[inline]
     fn with_hex<T>(&self, f: impl FnOnce(&HexBytes) -> T) -> T {
         f(&self.as_hex_bytes())
     }
-    #[inline(always)]
+    #[inline]
     fn with_hex_upper<T>(&self, f: impl FnOnce(&HexBytes) -> T) -> T {
         f(&self.as_hex_bytes_upper())
     }
-    #[inline(always)]
+    #[inline]
     fn with_hex_ascii_str<T>(&self, f: impl FnOnce(&AsciiStr) -> T) -> T {
         self.with_hex(move |s| f(AsciiStr::from_ascii(&s).unwrap()))
     }
-    #[inline(always)]
+    #[inline]
     fn with_hex_ascii_str_upper<T>(&self, f: impl FnOnce(&AsciiStr) -> T) -> T {
         self.with_hex_upper(move |s| f(AsciiStr::from_ascii(&s).unwrap()))
     }
-    #[inline(always)]
+    #[inline]
     pub fn with_hex_str<T>(&self, f: impl FnOnce(&str) -> T) -> T {
         self.with_hex_ascii_str(move |s| f(s.as_str()))
     }
-    #[inline(always)]
+    #[inline]
     pub fn with_hex_str_upper<T>(&self, f: impl FnOnce(&str) -> T) -> T {
         self.with_hex_ascii_str_upper(move |s| f(s.as_str()))
     }

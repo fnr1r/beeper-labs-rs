@@ -1,3 +1,6 @@
+#![allow(clippy::missing_errors_doc)]
+#![allow(clippy::must_use_candidate)]
+
 #[cfg(feature = "binrw")]
 pub use binrw;
 

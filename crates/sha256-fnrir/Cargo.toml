@@ -30,3 +30,6 @@ binrw = ["dep:binrw"]
 bytemuck = ["dep:bytemuck"]
 const-default = ["dep:const-default"]
 mmap = ["dep:memmap2"]
+
+[lints]
+workspace = true

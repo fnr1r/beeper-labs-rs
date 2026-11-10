@@ -1,5 +1,6 @@
+#![allow(dead_code)]
 use cfg_if::cfg_if;
-use sha2::{Digest, Sha256};
+use sha2::{Digest as _, Sha256};
 
 use crate::Bytes;
 
