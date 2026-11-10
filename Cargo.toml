@@ -3,6 +3,7 @@ members = [
     "crates/btrreflink",
     "crates/controlflowtools",
     "crates/iter-retry",
+    "crates/sha256-fnrir",
     "crates/win32ix",
 ]
 resolver = "2"

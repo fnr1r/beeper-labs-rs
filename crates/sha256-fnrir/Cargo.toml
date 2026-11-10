@@ -1,0 +1,32 @@
+[package]
+name = "sha256-fnrir"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+ascii = "1.1"
+binrw = { version = "0.15", optional = true }
+cfg-if = "1"
+const-hex = "1.19"
+memmap2 = { version = "0.9", optional = true }
+ring = { version = "0.17", optional = true }
+sha2 = "0.11"
+
+[dependencies.bytemuck]
+version = "1.25.2"
+features = ["derive"]
+optional = true
+
+[dependencies.const-default]
+version = "1"
+features = ["derive"]
+optional = true
+
+[features]
+backend_auto = ["backend_ring"]
+backend_ring = ["dep:ring"]
+
+binrw = ["dep:binrw"]
+bytemuck = ["dep:bytemuck"]
+const-default = ["dep:const-default"]
+mmap = ["dep:memmap2"]
