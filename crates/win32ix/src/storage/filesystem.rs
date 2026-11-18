@@ -91,3 +91,7 @@ pub fn get_volume_flags_by_handle(file: &impl AsRawHandle) -> Result<u32> {
     unsafe { GetVolumeInformationByHandleW(file, None, None, None, flags, None) }?;
     Ok(volume_flags)
 }
+
+#[cfg(test)]
+#[path = "filesystem_tests.rs"]
+mod tests;
