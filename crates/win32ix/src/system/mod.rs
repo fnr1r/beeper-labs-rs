@@ -2,6 +2,7 @@ mod duplicate_extents_to_file;
 mod duplicate_extents_to_file_builder;
 mod get_integrity_information;
 pub mod ioctl;
+pub mod library_loader;
 mod set_integrity_information;
 mod set_sparse;
 pub mod system_services;

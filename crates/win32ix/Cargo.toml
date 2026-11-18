@@ -23,6 +23,7 @@ features = [
     "Win32_System",
     "Win32_System_IO",
     "Win32_System_Ioctl",
+    "Win32_System_LibraryLoader",
     "Win32_System_SystemServices",
 ]
 

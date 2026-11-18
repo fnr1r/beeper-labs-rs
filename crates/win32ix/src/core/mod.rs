@@ -6,4 +6,6 @@ pub use self::{
 };
 
 pub mod error;
+pub(crate) mod error_ext;
+pub(crate) mod path;
 pub mod string;
