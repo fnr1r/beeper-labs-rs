@@ -1,5 +1,4 @@
 use core::fmt::{Debug, Display, Formatter, LowerHex, Result as FmtResult, UpperHex};
-
 use std::io::{Read, Result as IoResult};
 
 use ascii::AsciiStr;
