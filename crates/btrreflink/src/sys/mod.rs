@@ -9,5 +9,6 @@ cfg_if! {
         pub use self::windows::*;
     } else {
         pub use crate::stubs::*;
+        use thiserror as _;
     }
 }
