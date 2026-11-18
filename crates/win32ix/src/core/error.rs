@@ -1,4 +1,4 @@
-pub use windows::core::{Error, HRESULT as HResult};
+pub use windows::core::{Error, BOOL as WinBool, HRESULT as HResult};
 
 pub use self::{Error as WinError, Result as WinResult};
 
